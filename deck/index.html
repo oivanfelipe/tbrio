@@ -1,0 +1,548 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>TB Rio | Resultados e Números 12 Meses</title>
+<meta name="description" content="Resultados e números do funil de leads da TB Rio, de novembro de 2025 a novembro de 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#111111; --red:#C00000; --wine:#6B0000; --mute:#595959; --soft:#F5F5F5; --line:#D9D9D9; --white:#ffffff; --dmute:#BFBFBF;
+  --ease:cubic-bezier(.22,.8,.2,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#0b0b0b;overflow:hidden}
+body{font-family:Inter,Arial,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+#stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform-origin:center center;background:#fff;overflow:hidden}
+#bar{position:fixed;left:0;top:0;height:4px;width:0;background:var(--red);z-index:20;transition:width .8s var(--ease)}
+
+/* ---------- slide base & transitions ---------- */
+.slide{position:absolute;inset:0;opacity:0;visibility:hidden;transform:translateX(90px);
+  transition:opacity .6s ease,transform .9s var(--ease),visibility 0s linear .9s}
+.slide.active{opacity:1;visibility:visible;transform:none;transition-delay:0s}
+.slide.past-left{transform:translateX(-90px)}
+.slide.pre-left{transform:translateX(-90px);transition:none}
+.slide.light{background:#fff;color:var(--ink)}
+.slide.dark{background:var(--ink);color:#fff}
+.wrap{position:absolute;inset:0;padding:100px 140px 124px;display:flex;flex-direction:column}
+.eyebrow{font-family:Oswald,Arial,sans-serif;font-size:26px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--red)}
+.title{font-family:Oswald,Arial,sans-serif;font-size:72px;font-weight:600;line-height:1.06;margin-top:14px;letter-spacing:-.005em;max-width:1640px}
+.sub{font-size:28px;line-height:1.4;color:var(--mute);margin-top:16px;max-width:1500px}
+.dark .sub{color:var(--dmute)}
+.body{flex:1;display:flex;margin-top:34px;min-height:0}
+.take{display:flex;align-items:center;gap:22px;font-size:30px;font-weight:600;line-height:1.35;margin-top:26px;max-width:1640px}
+.take::before{content:"";flex:none;width:56px;height:4px;background:var(--red)}
+.foot{position:absolute;left:140px;right:140px;bottom:44px;display:flex;justify-content:space-between;align-items:center;font-size:22px;color:var(--mute)}
+.dark .foot{color:var(--dmute)}
+.foot b{font-family:Oswald,Arial,sans-serif;font-weight:600;letter-spacing:.04em;color:var(--ink);margin-left:22px}
+.dark .foot b{color:#fff}
+.num{font-family:Oswald,Arial,sans-serif;font-weight:700;line-height:1;font-variant-numeric:tabular-nums}
+.red{color:var(--red)}
+.lbl{font-size:24px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.mute{color:var(--mute)} .dark .mute{color:var(--dmute)}
+
+/* ---------- entrance animations (replay each visit) ---------- */
+@keyframes rise{from{opacity:0;transform:translateY(34px)}to{opacity:1;transform:none}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes growY{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes growX{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes pop{0%{opacity:0;transform:scale(.6)}70%{transform:scale(1.08)}100%{opacity:1;transform:none}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,255,255,.45)}50%{box-shadow:0 0 0 14px rgba(255,255,255,0)}}
+.slide.active .a{animation:rise .85s var(--ease) both;animation-delay:calc(var(--d,0)*1ms + 280ms)}
+.slide.active .f{animation:fade 1s ease both;animation-delay:calc(var(--d,0)*1ms + 280ms)}
+.slide.active .gy{transform-origin:bottom;animation:growY 1s var(--ease) both;animation-delay:calc(var(--d,0)*1ms + 380ms)}
+.slide.active .gx{transform-origin:left;animation:growX 1.1s var(--ease) both;animation-delay:calc(var(--d,0)*1ms + 380ms)}
+.slide.active .pp{animation:pop .7s var(--ease) both;animation-delay:calc(var(--d,0)*1ms + 380ms)}
+
+/* ---------- components ---------- */
+.cols{display:flex;gap:0;width:100%}
+.col{flex:1;padding:18px 44px 0;border-left:5px solid var(--line);display:flex;flex-direction:column;gap:14px;justify-content:flex-start}
+.col:first-child{padding-left:36px}
+.col.hot{border-left-color:var(--red)}
+.col .num{font-size:190px}
+.col p.t{font-size:28px;font-weight:700}
+.col p.d{font-size:26px;line-height:1.45;color:var(--mute)}
+.dark .col{border-left-color:#3a3a3a}.dark .col.hot{border-left-color:var(--red)}
+.dark .col p.d{color:var(--dmute)}
+
+.card{background:var(--soft);border-radius:18px;padding:36px 42px;display:flex;flex-direction:column;gap:10px}
+.card.dk{background:var(--ink);color:#fff}
+.card.rd{background:#FFF5F5;box-shadow:inset 6px 0 0 var(--red)}
+.pill{display:inline-block;font-size:24px;font-weight:700;padding:6px 20px;border-radius:999px}
+.pill.ok{background:#E6F4EA;color:#1B7F37}
+.pill.bad{background:#FDDEDE;color:var(--red)}
+
+/* volume chart */
+.chart{display:flex;align-items:flex-end;gap:16px;width:100%;border-bottom:4px solid var(--ink);height:100%}
+.chart .c{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:8px;height:100%}
+.chart .v{font-size:26px;font-weight:700}
+.chart .b{width:100%;background:var(--line);border-radius:6px 6px 0 0}
+.chart .b.r{background:var(--red)} .chart .b.k{background:var(--ink)}
+.chart .m{font-size:22px;color:var(--mute);padding-top:10px;position:relative;top:44px;height:0}
+.chartwrap{width:100%;padding-bottom:84px}
+
+/* funnel */
+.fun{display:flex;flex-direction:column;gap:18px;width:100%;justify-content:center}
+.fun .r{display:flex;align-items:center}
+.fun .bx{width:1180px}
+.fun .bar{height:82px;display:flex;align-items:center;padding-left:32px;font-size:30px;font-weight:700;border-radius:4px}
+.fun .rate{font-size:28px;color:var(--dmute);padding-left:40px}
+
+/* tables */
+.tbl{width:100%;border-collapse:collapse;font-size:34px}
+.tbl th{font-size:24px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);text-align:right;padding:0 32px 18px;font-weight:600}
+.tbl th:first-child{text-align:left;padding-left:0}
+.tbl td{padding:30px 32px;border-top:2px solid var(--line);text-align:right}
+.tbl td:first-child{text-align:left;padding-left:0}
+.tbl tr.hl td{background:#FFF5F5}
+.tbl tr.tot td{font-weight:700;border-top:3px solid var(--ink)}
+
+/* step lists */
+.li{display:flex;gap:22px;align-items:baseline;font-size:31px;line-height:1.35}
+.li i{font-style:normal;font-family:Oswald,Arial,sans-serif;font-weight:700;font-size:38px;color:var(--red);width:56px;flex:none}
+
+/* timeline */
+.tl{position:relative;height:130px;margin:0 140px}
+.tl .ln{position:absolute;left:0;right:0;top:24px;height:4px;background:var(--line)}
+.tl .nd{position:absolute;top:0;transform:translateX(-50%);text-align:center;width:260px}
+.tl .nd b{display:grid;place-items:center;margin:0 auto;width:52px;height:52px;border-radius:50%;background:var(--ink);color:#fff;font-family:Oswald,Arial,sans-serif;font-size:24px;font-weight:600}
+.tl .nd.last b{background:var(--red)}
+.tl .nd span{display:block;margin-top:14px;font-size:24px;color:var(--mute)}
+
+/* cta */
+.cta{background:var(--red);color:#fff;border-radius:18px;padding:26px 40px;font-family:Oswald,Arial,sans-serif;font-size:46px;font-weight:600}
+.slide.active .cta{animation:rise .85s var(--ease) both,pulse 2.4s ease-in-out 1.6s 3;animation-delay:900ms,2.2s}
+
+/* cover / end */
+.cover{justify-content:center}
+.cover .big{font-family:Oswald,Arial,sans-serif;font-weight:700;text-transform:uppercase;line-height:.98;font-size:210px;letter-spacing:-.01em}
+.bar-r{position:absolute;right:0;top:0;width:34px;height:100%;background:var(--red)}
+.rule{width:140px;height:8px;background:var(--red);margin-bottom:36px}
+.slide.active .rule{transform-origin:left;animation:growX .9s var(--ease) both;animation-delay:300ms}
+.hint{position:absolute;left:0;right:0;bottom:104px;text-align:center;font-size:22px;color:var(--dmute);letter-spacing:.06em;transition:opacity 1s}
+
+/* nav */
+.nav{position:fixed;top:50%;width:56px;height:56px;margin-top:-28px;border-radius:50%;border:0;background:rgba(17,17,17,.55);color:#fff;font-size:26px;cursor:pointer;opacity:0;transition:opacity .3s;z-index:30}
+.nav.l{left:18px}.nav.r{right:18px}
+body.mv .nav{opacity:.8}
+.nav:hover{background:var(--red);opacity:1}
+
+@media (prefers-reduced-motion: reduce){
+  .slide,.slide.active .a,.slide.active .f,.slide.active .gy,.slide.active .gx,.slide.active .pp,.slide.active .cta{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<div id="stage">
+
+<!-- 1 CAPA -->
+<section class="slide dark" data-t="Capa">
+  <div class="bar-r"></div>
+  <div class="wrap cover">
+    <div class="rule"></div>
+    <p class="eyebrow a" style="--d:100">TB Rio | Novembro de 2026</p>
+    <h1 class="big a" style="--d:250;margin-top:22px">Resultados<br><span class="red">12 meses</span></h1>
+    <p class="a" style="--d:600;font-size:34px;color:var(--dmute);margin-top:34px">O que construímos em 12 meses, onde o resultado trava e como avançar</p>
+    <p class="hint f" id="hint" style="--d:1400">Use as setas do teclado, clique ou deslize para navegar</p>
+  </div>
+  <div class="foot"><span></span><span><b>V4 Carvalho &amp; Co</b></span></div>
+</section>
+
+<!-- 2 RESUMO -->
+<section class="slide light" data-t="Resumo executivo">
+  <div class="wrap">
+    <p class="eyebrow a">Resumo executivo</p>
+    <h2 class="title a" style="--d:80">A demanda escalou. O próximo ganho está na conversão</h2>
+    <p class="sub a" style="--d:160">Novembro de 2025 a novembro de 2026, em três mensagens.</p>
+    <div class="body"><div class="cols">
+      <div class="col a" style="--d:250"><p class="lbl mute">O que entregamos</p><p class="num" style="font-size:190px"><span data-to="94">94</span></p><p class="t">vistorias a partir de 346 leads</p><p class="d">Média de 42 leads por mês desde abril, a R$ 104 de mídia por lead.</p></div>
+      <div class="col hot a" style="--d:420"><p class="lbl mute">Onde trava</p><p class="num red" style="font-size:190px"><span data-to="5" data-suf="%">5%</span></p><p class="t">das vistorias viram contrato</p><p class="d">47 vistorias paradas e 118 leads qualificados que não chegaram à vistoria.</p></div>
+      <div class="col a" style="--d:590"><p class="lbl mute">Como avançar</p><p class="num" style="font-size:190px"><span data-to="3">3</span></p><p class="t">frentes de ação</p><p class="d">CRM com cadência ativa, treinamento comercial e mais verba de mídia, com custo total menor.</p></div>
+    </div></div>
+    <p class="take a" style="--d:800">Primeiro corrigimos a conversão, depois ampliamos a aquisição.</p>
+  </div>
+  <div class="foot"><span>TB Rio | Resultados e números dos 12 meses</span><span><span class="pg"></span><b>V4 Carvalho &amp; Co</b></span></div>
+</section>
+
+<!-- 3 INVESTIMENTO -->
+<section class="slide dark" data-t="Investimento">
+  <div class="wrap">
+    <p class="eyebrow a">01 Contexto</p>
+    <h2 class="title a" style="--d:80">R$ 129.600 investidos em 12 meses. O que isso gerou?</h2>
+    <p class="sub a" style="--d:160">Composição do investimento recorrente, de novembro de 2025 a novembro de 2026.</p>
+    <div class="body" style="gap:110px;align-items:center">
+      <div style="flex:1">
+        <p class="num red a" style="--d:260;font-size:122px;white-space:nowrap"><span data-to="129.6" data-dec="1" data-pre="R$ " data-suf=" mil">R$ 129,6 mil</span></p>
+        <p class="a" style="--d:380;font-size:32px;font-weight:700;margin-top:18px">Investimento total do ciclo</p>
+        <p class="a mute" style="--d:440;font-size:28px;margin-top:8px">R$ 375 por lead novo, ou R$ 104 considerando só a mídia.</p>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:34px">
+        <div class="a" style="--d:300"><div style="display:flex;justify-content:space-between;align-items:baseline"><div><p style="font-size:30px;font-weight:700">Assessoria V4</p><p class="mute" style="font-size:25px">12 meses de R$ 7.500</p></div><p class="num" style="font-size:64px"><span data-to="90" data-pre="R$ " data-suf=" mil">R$ 90 mil</span></p></div><div style="height:8px;background:#2c2c2c;margin-top:14px"><div class="gx" style="--d:400;height:8px;width:69.4%;background:#fff"></div></div></div>
+        <div class="a" style="--d:420"><div style="display:flex;justify-content:space-between;align-items:baseline"><div><p style="font-size:30px;font-weight:700">Mídia</p><p class="mute" style="font-size:25px">12 meses de R$ 3.000</p></div><p class="num" style="font-size:64px"><span data-to="36" data-pre="R$ " data-suf=" mil">R$ 36 mil</span></p></div><div style="height:8px;background:#2c2c2c;margin-top:14px"><div class="gx" style="--d:520;height:8px;width:27.8%;background:#C00000"></div></div></div>
+        <div class="a" style="--d:540"><div style="display:flex;justify-content:space-between;align-items:baseline"><div><p style="font-size:30px;font-weight:700">CRM</p><p class="mute" style="font-size:25px">3 meses de R$ 1.200</p></div><p class="num" style="font-size:64px"><span data-to="3.6" data-dec="1" data-pre="R$ " data-suf=" mil">R$ 3,6 mil</span></p></div><div style="height:8px;background:#2c2c2c;margin-top:14px"><div class="gx" style="--d:640;height:8px;width:2.8%;background:#fff"></div></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>TB Rio | Resultados e números dos 12 meses</span><span><span class="pg"></span><b>V4 Carvalho &amp; Co</b></span></div>
+</section>
+
+<!-- 4 VOLUME -->
+<section class="slide light" data-t="Volume de leads">
+  <div class="wrap">
+    <p class="eyebrow a">02 O que o investimento gerou</p>
+    <h2 class="title a" style="--d:80">A demanda escalou: 42 leads por mês desde abril</h2>
+    <p class="sub a" style="--d:160">Leads novos por mês de entrada. Em 34 leads sem data, a data foi estimada pela posição na planilha.</p>
+    <div class="body" style="padding-top:10px"><div class="chartwrap"><div class="chart">
+      <div class="c"><span class="v">1</span><div class="b gy" style="--d:200;height:5px"></div><span class="m">11/25</span></div>
+      <div class="c"><span class="v">6</span><div class="b gy" style="--d:240;height:29px"></div><span class="m">12/25</span></div>
+      <div class="c"><span class="v">8</span><div class="b gy" style="--d:280;height:39px"></div><span class="m">01/26</span></div>
+      <div class="c"><span class="v">6</span><div class="b gy" style="--d:320;height:29px"></div><span class="m">02/26</span></div>
+      <div class="c"><span class="v">14</span><div class="b gy" style="--d:360;height:69px"></div><span class="m">03/26</span></div>
+      <div class="c"><span class="v">35</span><div class="b r gy" style="--d:400;height:172px"></div><span class="m">04/26</span></div>
+      <div class="c"><span class="v">40</span><div class="b r gy" style="--d:440;height:197px"></div><span class="m">05/26</span></div>
+      <div class="c"><span class="v">36</span><div class="b r gy" style="--d:480;height:177px"></div><span class="m">06/26</span></div>
+      <div class="c"><span class="v">39</span><div class="b r gy" style="--d:520;height:192px"></div><span class="m">07/26</span></div>
+      <div class="c"><span class="v">61</span><div class="b k gy" style="--d:560;height:300px"></div><span class="m">08/26</span></div>
+      <div class="c"><span class="v">43</span><div class="b r gy" style="--d:600;height:212px"></div><span class="m">09/26</span></div>
+      <div class="c"><span class="v">42</span><div class="b r gy" style="--d:640;height:207px"></div><span class="m">10/26</span></div>
+      <div class="c"><span class="v">15</span><div class="b gy" style="--d:680;height:74px"></div><span class="m">11/26*</span></div>
+    </div></div></div>
+    <p class="take a" style="--d:900">O volume saiu de 6 leads em dezembro para 61 em agosto, pico do ciclo. <span class="mute" style="font-weight:400;font-size:24px">* Novembro parcial, até o dia 12.</span></p>
+  </div>
+  <div class="foot"><span>TB Rio | Resultados e números dos 12 meses</span><span><span class="pg"></span><b>V4 Carvalho &amp; Co</b></span></div>
+</section>
+
+<!-- 5 RESULTADO -->
+<section class="slide light" data-t="Resultado">
+  <div class="wrap">
+    <p class="eyebrow a">02 O que o investimento gerou</p>
+    <h2 class="title a" style="--d:80">346 leads geraram 94 vistorias e 5 clientes</h2>
+    <p class="sub a" style="--d:160">Base sem testes, duplicados e contatos de clientes atuais.</p>
+    <div class="body"><div class="cols">
+      <div class="col a" style="--d:250"><p class="num"><span data-to="346">346</span></p><p class="t" style="text-transform:uppercase">Leads novos</p><p class="d">Média de 42 por mês desde abril de 2026.</p></div>
+      <div class="col a" style="--d:380"><p class="num"><span data-to="212">212</span></p><p class="t" style="text-transform:uppercase">Qualificados</p><p class="d">61% dentro do escopo. Os outros 134 pediam compra, outra cidade ou outro serviço.</p></div>
+      <div class="col a" style="--d:510"><p class="num"><span data-to="94">94</span></p><p class="t" style="text-transform:uppercase">Vistorias</p><p class="d">44% dos qualificados. Etapa em que o time converte bem a demanda em agenda.</p></div>
+      <div class="col hot a" style="--d:640"><p class="num red"><span data-to="5">5</span></p><p class="t" style="text-transform:uppercase">Clientes fechados</p><p class="d">5% das vistorias. Valor estimado de R$ 3.850, a validar com a TB Rio.</p></div>
+    </div></div>
+    <p class="take a" style="--d:850">A operação gera demanda e agenda vistorias. A perda relevante ocorre depois, na passagem de vistoria para contrato.</p>
+  </div>
+  <div class="foot"><span>TB Rio | Resultados e números dos 12 meses</span><span><span class="pg"></span><b>V4 Carvalho &amp; Co</b></span></div>
+</section>
+
+<!-- 6 FUNIL -->
+<section class="slide dark" data-t="Funil">
+  <div class="wrap">
+    <p class="eyebrow a">02 O que o investimento gerou</p>
+    <h2 class="title a" style="--d:80">94 vistorias viraram 5 contratos</h2>
+    <p class="sub a" style="--d:160">Leads em cada etapa e taxa de passagem para a etapa seguinte.</p>
+    <div class="body"><div class="fun">
+      <div class="r"><div class="bx"><div class="bar gx" style="--d:250;width:100%;background:#fff;color:#111">Leads novos &nbsp;346</div></div><p class="rate f" style="--d:700">Base do funil</p></div>
+      <div class="r"><div class="bx"><div class="bar gx" style="--d:400;width:83%;background:#D9D9D9;color:#111">Leads qualificados &nbsp;212</div></div><p class="rate f" style="--d:850">61% da etapa anterior</p></div>
+      <div class="r"><div class="bx"><div class="bar gx" style="--d:550;width:64%;background:#C00000;color:#fff">Vistorias &nbsp;94</div></div><p class="rate f" style="--d:1000">44% da etapa anterior</p></div>
+      <div class="r"><div class="bx"><div class="bar gx" style="--d:700;width:47%;background:#9A0000;color:#fff">Propostas e negociações &nbsp;22</div></div><p class="rate f" style="--d:1150">23% da etapa anterior</p></div>
+      <div class="r"><div class="bx"><div class="bar gx" style="--d:850;width:32%;background:#6B0000;color:#fff">Clientes &nbsp;5</div></div><p class="rate f" style="--d:1300">23% da etapa anterior</p></div>
+    </div></div>
+    <p class="take a" style="--d:1300">Das 94 vistorias, 47 seguem com status de vistoria marcada. A maior perda está depois da visita.</p>
+  </div>
+  <div class="foot"><span>TB Rio | Resultados e números dos 12 meses</span><span><span class="pg"></span><b>V4 Carvalho &amp; Co</b></span></div>
+</section>
+
+<!-- 7 CUSTO -->
+<section class="slide light" data-t="Custo por vistoria">
+  <div class="wrap">
+    <p class="eyebrow a">02 O que o investimento gerou</p>
+    <h2 class="title a" style="--d:80">Cada vistoria custou R$ 383 em mídia</h2>
+    <p class="sub a" style="--d:160">Custo por vistoria sobre as 94 vistorias geradas no ciclo.</p>
+    <div class="body" style="gap:28px">
+      <div class="card dk a" style="--d:250;flex:1.3;justify-content:center;padding:48px 60px"><p class="num" style="font-size:200px"><span data-to="383" data-pre="R$ ">R$ 383</span></p><p class="lbl" style="margin-top:12px">Custo de mídia por vistoria</p><p style="font-size:27px;color:var(--dmute)">R$ 36.000 divididos por 94 vistorias. Considera apenas os anúncios.</p></div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:28px">
+        <div class="card rd a" style="--d:420;flex:1;justify-content:center"><p class="num" style="font-size:88px"><span data-to="1379" data-pre="R$ ">R$ 1.379</span></p><p style="font-size:28px;font-weight:700">Custo total por vistoria</p><p class="mute" style="font-size:25px">R$ 129.600 divididos por 94. Inclui assessoria, mídia e CRM.</p></div>
+        <div class="card a" style="--d:560;flex:1;justify-content:center"><p class="num" style="font-size:88px"><span data-to="44" data-suf="%">44%</span></p><p style="font-size:28px;font-weight:700">dos qualificados chegam à vistoria</p><p class="mute" style="font-size:25px">94 de 212 leads qualificados.</p></div>
+      </div>
+    </div>
+    <p class="take a" style="--d:800">A vistoria é a etapa mais eficiente do funil. O problema começa quando o volume sobe e o atendimento não acompanha.</p>
+  </div>
+  <div class="foot"><span>TB Rio | Resultados e números dos 12 meses</span><span><span class="pg"></span><b>V4 Carvalho &amp; Co</b></span></div>
+</section>
+
+<!-- 8 TENDENCIA -->
+<section class="slide light" data-t="Taxa de vistoria">
+  <div class="wrap">
+    <p class="eyebrow a">03 Onde o resultado trava</p>
+    <h2 class="title a" style="--d:80">Quanto maior o volume, menor a taxa de vistoria</h2>
+    <p class="sub a" style="--d:160">Vistorias sobre leads qualificados, por período de entrada. O último período ainda está em atendimento.</p>
+    <div class="body" style="gap:90px;padding-top:6px">
+      <div class="chartwrap" style="flex:1.8"><div class="chart" style="gap:34px">
+        <div class="c"><span class="num" style="font-size:60px"><span data-to="83" data-suf="%">83%</span></span><div class="b k gy" style="--d:250;height:300px"></div><span class="m">Nov/25 a Mar/26</span></div>
+        <div class="c"><span class="num" style="font-size:60px"><span data-to="55" data-suf="%">55%</span></span><div class="b r gy" style="--d:400;height:198px"></div><span class="m">Abr a Jun/26</span></div>
+        <div class="c"><span class="num" style="font-size:60px"><span data-to="29" data-suf="%">29%</span></span><div class="b r gy" style="--d:550;height:105px"></div><span class="m">Jul a Set/26</span></div>
+        <div class="c"><span class="num mute" style="font-size:60px"><span data-to="12" data-suf="%">12%</span></span><div class="b gy" style="--d:700;height:44px"></div><span class="m">Out a Nov/26*</span></div>
+      </div></div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:30px;justify-content:center;padding-bottom:50px">
+        <div class="a" style="--d:600;border-left:6px solid var(--red);padding-left:26px"><p class="lbl">Leads por período</p><p class="mute" style="font-size:30px;margin-top:6px">35, 111, 143 e 57</p></div>
+        <div class="a" style="--d:760;border-left:6px solid var(--red);padding-left:26px"><p class="lbl">Leads sem retorno</p><p class="mute" style="font-size:30px;margin-top:6px">0, 12, 32 e 0</p></div>
+        <div class="a" style="--d:920;border-left:6px solid var(--red);padding-left:26px"><p class="lbl">Leads com consultor</p><p class="mute" style="font-size:30px;margin-top:6px">34, 40, 0 e 0</p></div>
+        <p class="mute f" style="--d:1000;font-size:22px">* Período em andamento.</p>
+      </div>
+    </div>
+    <p class="take a" style="--d:1000">A taxa de vistoria cai de 83% para 29% enquanto o volume mensal passa de 7 para 42 leads.</p>
+  </div>
+  <div class="foot"><span>TB Rio | Resultados e números dos 12 meses</span><span><span class="pg"></span><b>V4 Carvalho &amp; Co</b></span></div>
+</section>
+
+<!-- 9 GARGALO -->
+<section class="slide light" data-t="Gargalo">
+  <div class="wrap">
+    <p class="eyebrow a">03 Onde o resultado trava</p>
+    <h2 class="title a" style="--d:80">O gargalo está no atendimento comercial</h2>
+    <p class="sub a" style="--d:160">Três evidências extraídas da planilha de acompanhamento de leads.</p>
+    <div class="body" style="gap:28px">
+      <div class="card a" style="--d:250;flex:1;box-shadow:inset 0 6px 0 var(--red)"><p class="lbl red">Fato observado</p><p class="num" style="font-size:150px;margin-top:6px"><span data-to="118">118</span></p><p style="font-size:30px;font-weight:700">de 212 qualificados sem vistoria</p><p class="mute" style="font-size:27px">43 estão em sem retorno e 44 como perdidos.</p></div>
+      <div class="card a" style="--d:420;flex:1;box-shadow:inset 0 6px 0 var(--red)"><p class="lbl red">Fato observado</p><p class="num" style="font-size:150px;margin-top:6px"><span data-to="47">47</span></p><p style="font-size:30px;font-weight:700">vistorias paradas</p><p class="mute" style="font-size:27px">Seguem como vistoria marcada, 43 delas há mais de 60 dias.</p></div>
+      <div class="card dk a" style="--d:590;flex:1;box-shadow:inset 0 6px 0 var(--red)"><p class="lbl" style="color:#fff">Hipótese</p><p class="num" style="font-size:150px;margin-top:6px">?</p><p style="font-size:30px;font-weight:700">primeira resposta ao lead</p><p style="font-size:27px;color:var(--dmute)">Sem horário de contato na base. O CRM vai medir esse tempo.</p></div>
+    </div>
+    <p class="take a" style="--d:850">O problema é de operação: lead sem dono, sem registro e sem cadência de retomada após a vistoria. É isso que o CRM e o time precisam resolver.</p>
+  </div>
+  <div class="foot"><span>TB Rio | Resultados e números dos 12 meses</span><span><span class="pg"></span><b>V4 Carvalho &amp; Co</b></span></div>
+</section>
+
+<!-- 10 PAPEIS -->
+<section class="slide light" data-t="CRM e time">
+  <div class="wrap">
+    <p class="eyebrow a">04 Como destravar</p>
+    <h2 class="title a" style="--d:80">O CRM dá visibilidade, o time dá execução</h2>
+    <p class="sub a" style="--d:160">O que a ferramenta resolve e o que depende da rotina comercial da TB Rio.</p>
+    <div class="body" style="gap:28px">
+      <div class="card dk a" style="--d:250;flex:1;padding:44px 52px;gap:30px;justify-content:center">
+        <p style="font-family:Oswald,Arial,sans-serif;font-size:46px;font-weight:600;text-transform:uppercase">O que o CRM resolve</p>
+        <div class="li a" style="--d:450"><i>01</i><span>Registra o horário do primeiro contato</span></div>
+        <div class="li a" style="--d:560"><i>02</i><span>Alerta lead sem resposta e tarefa vencida</span></div>
+        <div class="li a" style="--d:670"><i>03</i><span>Mostra funil por etapa</span></div>
+      </div>
+      <div class="card rd a" style="--d:400;flex:1;padding:44px 52px;gap:30px;justify-content:center;box-shadow:inset 0 0 0 4px var(--red)">
+        <p style="font-family:Oswald,Arial,sans-serif;font-size:46px;font-weight:600;text-transform:uppercase;color:var(--red)">O que o time precisa resolver</p>
+        <div class="li a" style="--d:600"><i>01</i><span>Responder o lead novo no mesmo dia útil</span></div>
+        <div class="li a" style="--d:710"><i>02</i><span>Registrar todo contato feito</span></div>
+        <div class="li a" style="--d:820"><i>03</i><span>Atualizar o status após cada vistoria</span></div>
+        <div class="li a" style="--d:930"><i>04</i><span>Enviar proposta e cobrar retorno em prazo definido</span></div>
+      </div>
+    </div>
+    <p class="take a" style="--d:1000">O CRM mede e automatiza. A cadência de atendimento e de follow-up só muda com a disciplina do time.</p>
+  </div>
+  <div class="foot"><span>TB Rio | Resultados e números dos 12 meses</span><span><span class="pg"></span><b>V4 Carvalho &amp; Co</b></span></div>
+</section>
+
+<!-- 11 CRM -->
+<section class="slide light" data-t="Automação do CRM">
+  <div class="wrap">
+    <p class="eyebrow a">04 Como destravar</p>
+    <h2 class="title a" style="--d:80">Automações para recuperar leads sem resposta</h2>
+    <p class="sub a" style="--d:160;display:flex;align-items:center;gap:22px">Fluxo de chatbot e cadência de follow-up para leads sem resposta. <span class="pill ok pp" style="--d:700">Ativado em 11/11</span></p>
+    <div class="body" style="flex-direction:column;gap:34px">
+      <div style="display:flex;gap:40px">
+        <div class="a" style="--d:300;flex:1;border-top:6px solid var(--ink);padding-top:18px"><p class="num red" style="font-size:64px">01</p><p class="lbl" style="margin-top:8px">Receber e qualificar</p><p class="mute" style="font-size:25px;line-height:1.4;margin-top:6px">O chatbot identifica o motivo do contato e coleta as informações essenciais.</p></div>
+        <div class="a" style="--d:420;flex:1;border-top:6px solid var(--ink);padding-top:18px"><p class="num red" style="font-size:64px">02</p><p class="lbl" style="margin-top:8px">Organizar o atendimento</p><p class="mute" style="font-size:25px;line-height:1.4;margin-top:6px">As respostas vão para o card do lead e o contato segue para a equipe.</p></div>
+        <div class="a" style="--d:540;flex:1;border-top:6px solid var(--red);padding-top:18px"><p class="num red" style="font-size:64px">03</p><p class="lbl" style="margin-top:8px">Retomar oportunidades</p><p class="mute" style="font-size:25px;line-height:1.4;margin-top:6px">Quatro contatos em 14 dias. A sequência para quando o cliente responde.</p></div>
+        <div class="a" style="--d:660;flex:1;border-top:6px solid var(--ink);padding-top:18px"><p class="num red" style="font-size:64px">04</p><p class="lbl" style="margin-top:8px">Prioridade em emergência</p><p class="mute" style="font-size:25px;line-height:1.4;margin-top:6px">Elevador com problema recebe aviso e atendimento humano prioritário.</p></div>
+      </div>
+      <div style="margin-top:auto">
+        <p class="lbl mute a" style="--d:800;margin-bottom:18px">Cadência de retomada</p>
+        <div class="tl">
+          <div class="ln gx" style="--d:850"></div>
+          <div class="nd pp" style="--d:950;left:0%"><b>D1</b><span>Retomada inicial</span></div>
+          <div class="nd pp" style="--d:1100;left:33.3%"><b>D3</b><span>Reforço do contato</span></div>
+          <div class="nd pp" style="--d:1250;left:66.6%"><b>D7</b><span>Nova oportunidade</span></div>
+          <div class="nd last pp" style="--d:1400;left:100%"><b>D14</b><span>Última tentativa</span></div>
+        </div>
+      </div>
+    </div>
+    <p class="take a" style="--d:1500">A cadência ataca os leads sem resposta, mas não substitui o follow-up do time após a vistoria.</p>
+  </div>
+  <div class="foot"><span>TB Rio | Resultados e números dos 12 meses</span><span><span class="pg"></span><b>V4 Carvalho &amp; Co</b></span></div>
+</section>
+
+<!-- 12 CENARIOS -->
+<section class="slide light" data-t="Cenários">
+  <div class="wrap">
+    <p class="eyebrow a">04 Como destravar</p>
+    <h2 class="title a" style="--d:80">Recuperar vistorias reduz o custo por cliente</h2>
+    <p class="sub a" style="--d:160">Cenários ilustrativos sobre as 94 vistorias do ciclo, sem aumento de mídia. O ticket de R$ 770 é estimado e deve ser validado.</p>
+    <div class="body" style="gap:28px">
+      <div class="card a" style="--d:250;flex:1;justify-content:center;padding:40px 46px"><p class="lbl mute">Hoje | fechamento de</p><p class="num" style="font-size:150px"><span data-to="5" data-suf="%">5%</span></p><p style="font-size:34px;font-weight:700">5 clientes</p><p style="font-size:28px">R$ 7.200 de mídia por cliente</p><p class="mute" style="font-size:25px">Base de comparação</p></div>
+      <div class="card rd a" style="--d:420;flex:1;justify-content:center;padding:40px 46px"><p class="lbl mute">Cenário | fechamento de</p><p class="num red" style="font-size:150px"><span data-to="10" data-suf="%">10%</span></p><p style="font-size:34px;font-weight:700">9 clientes</p><p style="font-size:28px">R$ 4.000 de mídia por cliente</p><p class="mute" style="font-size:25px">+ R$ 3.080 por mês estimados</p></div>
+      <div class="card dk a" style="--d:590;flex:1;justify-content:center;padding:40px 46px"><p class="lbl" style="color:var(--dmute)">Cenário | fechamento de</p><p class="num" style="font-size:150px"><span data-to="15" data-suf="%">15%</span></p><p style="font-size:34px;font-weight:700">14 clientes</p><p style="font-size:28px">R$ 2.571 de mídia por cliente</p><p style="font-size:25px;color:var(--dmute)">+ R$ 6.930 por mês estimados</p></div>
+    </div>
+    <p class="take a" style="--d:850">Elevar o fechamento das vistorias reduz o custo por cliente sem depender de mais mídia. Há 66 oportunidades abertas no pipeline.</p>
+  </div>
+  <div class="foot"><span>TB Rio | Resultados e números dos 12 meses</span><span><span class="pg"></span><b>V4 Carvalho &amp; Co</b></span></div>
+</section>
+
+<!-- 13 PROPOSTA -->
+<section class="slide light" data-t="Proposta">
+  <div class="wrap">
+    <p class="eyebrow a">05 Proposta</p>
+    <h2 class="title a" style="--d:80">Mais verba em anúncios, com custo total menor</h2>
+    <p class="sub a" style="--d:160">Com o CRM e o treinamento tratando a conversão, o próximo passo é ampliar a aquisição.</p>
+    <div class="body" style="gap:70px;align-items:center">
+      <table class="tbl" style="flex:1.7">
+        <tr class="a" style="--d:250"><th>Investimento mensal</th><th>Atual</th><th>Proposta</th></tr>
+        <tr class="a" style="--d:380"><td>Gestão de marketing</td><td class="mute">R$ 7.500</td><td><b>R$ 6.000</b></td></tr>
+        <tr class="hl a" style="--d:510"><td><b>Verba de anúncios</b></td><td class="mute">R$ 3.000</td><td class="red"><b>R$ 4.000</b></td></tr>
+        <tr class="tot a" style="--d:640"><td>Total mensal</td><td class="mute">R$ 10.500</td><td>R$ 10.000</td></tr>
+      </table>
+      <div style="flex:1;display:flex;flex-direction:column;gap:26px">
+        <div class="card dk a" style="--d:500"><p class="num" style="font-size:120px"><span data-to="500" data-pre="R$ ">R$ 500</span></p><p style="font-size:28px;font-weight:700">de economia por mês</p></div>
+        <div class="card rd a" style="--d:700"><p class="num red" style="font-size:120px"><span data-to="33" data-pre="+" data-suf="%">+33%</span></p><p style="font-size:28px;font-weight:700">de verba direta em mídia</p></div>
+      </div>
+    </div>
+    <p class="take a" style="--d:900">A ideia é simples: reduzir um pouco o custo da operação e direcionar mais recursos para a aquisição de leads.</p>
+  </div>
+  <div class="foot"><span>TB Rio | Resultados e números dos 12 meses</span><span><span class="pg"></span><b>V4 Carvalho &amp; Co</b></span></div>
+</section>
+
+<!-- 14 POTENCIAL -->
+<section class="slide dark" data-t="Potencial de leads">
+  <div class="wrap">
+    <p class="eyebrow a">05 Proposta</p>
+    <h2 class="title a" style="--d:80">Potencial de cerca de 65 leads por mês</h2>
+    <p class="sub a" style="--d:160">Projeção com R$ 4.000 de mídia, a partir do custo por lead geral dos últimos três meses completos.</p>
+    <div class="body" style="gap:100px;align-items:center">
+      <div style="flex:1">
+        <p class="lbl mute a" style="--d:250;padding-bottom:18px">Média geral: agosto a outubro de 2026</p>
+        <div class="a" style="--d:350;display:flex;justify-content:space-between;align-items:center;border-top:2px solid #3a3a3a;padding:24px 0"><p style="font-size:30px">Leads gerados</p><p class="num" style="font-size:64px"><span data-to="146">146</span></p></div>
+        <div class="a" style="--d:470;display:flex;justify-content:space-between;align-items:center;border-top:2px solid #3a3a3a;padding:24px 0"><p style="font-size:30px">Investidos em mídia</p><p class="num" style="font-size:64px"><span data-to="9000" data-pre="R$ ">R$ 9.000</span></p></div>
+        <div class="a" style="--d:590;display:flex;justify-content:space-between;align-items:center;border-top:2px solid #3a3a3a;border-bottom:2px solid #3a3a3a;padding:24px 0"><p style="font-size:30px">Custo médio por lead</p><p class="num red" style="font-size:64px"><span data-to="61.64" data-dec="2" data-pre="R$ ">R$ 61,64</span></p></div>
+      </div>
+      <div style="flex:1">
+        <p class="lbl mute a" style="--d:600">Projeção mensal com R$ 4.000</p>
+        <p class="num red a" style="--d:700;font-size:240px;margin-top:8px"><span data-to="65">65</span></p>
+        <p class="a" style="--d:850;font-size:34px;font-weight:700;margin-top:6px">leads por mês de potencial</p>
+        <p class="a mute" style="--d:950;font-size:27px;margin-top:10px;line-height:1.4">Cerca de 16 leads a mais do que os R$ 3.000 atuais (49 por mês), se o custo por lead se mantiver.</p>
+      </div>
+    </div>
+    <p class="take a" style="--d:1100">Premissa: o custo por lead geral dos últimos meses se mantém com a verba maior. O acompanhamento mensal confirma essa premissa.</p>
+  </div>
+  <div class="foot"><span>TB Rio | Resultados e números dos 12 meses</span><span><span class="pg"></span><b>V4 Carvalho &amp; Co</b></span></div>
+</section>
+
+<!-- 15 PARCERIA -->
+<section class="slide light" data-t="Parceria">
+  <div class="wrap">
+    <p class="eyebrow a">05 Proposta</p>
+    <h2 class="title a" style="--d:80">Treinamento comercial para o time, pela parceria</h2>
+    <p class="sub a" style="--d:160">Não se trata só de reduzir custos, mas de distribuir melhor os recursos para potencializar os resultados.</p>
+    <div class="body" style="gap:28px">
+      <div class="card a" style="--d:250;flex:1;padding:42px 50px;gap:24px;justify-content:center;box-shadow:inset 6px 0 0 var(--red)">
+        <p style="font-family:Oswald,Arial,sans-serif;font-size:46px;font-weight:600;text-transform:uppercase">Nosso objetivo</p>
+        <div class="li a" style="--d:450"><i>01</i><span>Reduzir o investimento mensal total</span></div>
+        <div class="li a" style="--d:560"><i>02</i><span>Ampliar a verba de aquisição</span></div>
+        <div class="li a" style="--d:670"><i>03</i><span>Aumentar o potencial de geração de leads</span></div>
+        <div class="li a" style="--d:780"><i>04</i><span>Acompanhar e otimizar a qualidade das oportunidades</span></div>
+      </div>
+      <div class="card dk a" style="--d:400;flex:1;padding:42px 50px;gap:20px;justify-content:center">
+        <p style="font-family:Oswald,Arial,sans-serif;font-size:46px;font-weight:600;text-transform:uppercase">Treinamento comercial</p>
+        <p style="font-size:31px;font-weight:700">Oferecido pela V4 ao time da TB Rio, pela parceria.</p>
+        <p style="font-size:28px;color:#D9D9D9;line-height:1.4">Foco sugerido: atendimento do lead novo, uso do CRM, condução pós-vistoria e follow-up.</p>
+        <p style="font-size:25px;color:var(--dmute)">Data, duração e formato a definir.</p>
+      </div>
+    </div>
+    <div class="cta" style="margin-top:26px">O que acha de seguirmos com esse ajuste?</div>
+  </div>
+  <div class="foot"><span>TB Rio | Resultados e números dos 12 meses</span><span><span class="pg"></span><b>V4 Carvalho &amp; Co</b></span></div>
+</section>
+
+<!-- 16 FIM -->
+<section class="slide dark" data-t="Encerramento">
+  <div class="bar-r"></div>
+  <div class="wrap cover">
+    <div class="rule"></div>
+    <p class="eyebrow a" style="--d:100">TB Rio | V4 Carvalho &amp; Co</p>
+    <h1 class="big a" style="--d:250;margin-top:22px;font-size:230px">Obrigado</h1>
+    <p class="a" style="--d:600;font-size:34px;color:var(--dmute);margin-top:34px;max-width:1400px">Próximo passo: aprovar o ajuste de investimento e definir a data do treinamento comercial.</p>
+  </div>
+  <div class="foot"><span></span><span><span class="pg"></span><b>V4 Carvalho &amp; Co</b></span></div>
+</section>
+
+</div>
+
+<button class="nav l" id="prev" aria-label="Slide anterior">&#8592;</button>
+<button class="nav r" id="next" aria-label="Próximo slide">&#8594;</button>
+
+<script>
+(function(){
+  var stage=document.getElementById('stage'), bar=document.getElementById('bar');
+  var slides=[].slice.call(document.querySelectorAll('.slide')), N=slides.length, cur=-1;
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var pad=function(n){return (n<10?'0':'')+n;};
+
+  function fit(){var s=Math.min(innerWidth/1920,innerHeight/1080);stage.style.transform='translate(-50%,-50%) scale('+s+')';}
+  addEventListener('resize',fit);fit();
+
+  slides.forEach(function(s,i){var p=s.querySelector('.pg');if(p)p.textContent=pad(i+1)+' / '+pad(N);});
+
+  function fmt(v,dec){return v.toLocaleString('pt-BR',{minimumFractionDigits:dec,maximumFractionDigits:dec});}
+  function counters(slide){
+    var els=slide.querySelectorAll('[data-to]');
+    [].forEach.call(els,function(el){
+      var to=parseFloat(el.getAttribute('data-to')),dec=parseInt(el.getAttribute('data-dec')||'0',10),
+          pre=el.getAttribute('data-pre')||'',suf=el.getAttribute('data-suf')||'';
+      var final=pre+fmt(to,dec)+suf;
+      if(reduce){el.textContent=final;return;}
+      el.textContent=pre+fmt(0,dec)+suf;
+      var delay=450,dur=1300,t0=null;
+      function step(ts){
+        if(t0===null)t0=ts;
+        var t=Math.min(1,Math.max(0,(ts-t0-delay)/dur)),e=1-Math.pow(1-t,3);
+        el.textContent=pre+fmt(to*e,dec)+suf;
+        if(t<1&&slide.classList.contains('active'))requestAnimationFrame(step);else if(t>=1)el.textContent=final;
+      }
+      requestAnimationFrame(step);
+    });
+  }
+
+  function go(n,dir){
+    n=Math.max(0,Math.min(N-1,n));
+    if(n===cur)return;
+    var old=slides[cur],nx=slides[n];
+    dir=dir||(n>cur?1:-1);
+    if(dir<0){nx.classList.add('pre-left');void nx.offsetWidth;nx.classList.remove('pre-left');}
+    if(old){old.classList.remove('active');if(dir>0)old.classList.add('past-left');
+      setTimeout(function(){old.classList.remove('past-left');},1000);}
+    nx.classList.remove('past-left');nx.classList.add('active');
+    cur=n;counters(nx);
+    bar.style.width=(N>1?cur/(N-1)*100:100)+'%';
+    document.title=(nx.getAttribute('data-t')||'')+' | TB Rio | Resultados e Números 12 Meses';
+    if(history.replaceState)history.replaceState(null,'','#'+(cur+1));
+    var h=document.getElementById('hint');if(h&&cur>0)h.style.opacity=0;
+  }
+  function next(){go(cur+1,1);} function prev(){go(cur-1,-1);}
+
+  addEventListener('keydown',function(e){
+    var k=e.key;
+    if(k==='ArrowRight'||k==='PageDown'||k===' '||k==='Enter'){e.preventDefault();next();}
+    else if(k==='ArrowLeft'||k==='PageUp'||k==='Backspace'){e.preventDefault();prev();}
+    else if(k==='Home'){go(0,-1);} else if(k==='End'){go(N-1,1);}
+    else if(k==='f'||k==='F'){if(!document.fullscreenElement)document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();else document.exitFullscreen();}
+  });
+  document.getElementById('next').addEventListener('click',function(e){e.stopPropagation();next();});
+  document.getElementById('prev').addEventListener('click',function(e){e.stopPropagation();prev();});
+  stage.addEventListener('click',function(e){ if(e.clientX<innerWidth*0.25)prev();else next(); });
+
+  var sx=null;
+  addEventListener('touchstart',function(e){sx=e.touches[0].clientX;},{passive:true});
+  addEventListener('touchend',function(e){if(sx===null)return;var dx=e.changedTouches[0].clientX-sx;sx=null;if(Math.abs(dx)>50){dx<0?next():prev();}},{passive:true});
+
+  var mt;addEventListener('mousemove',function(){document.body.classList.add('mv');clearTimeout(mt);mt=setTimeout(function(){document.body.classList.remove('mv');},2200);});
+
+  var start=parseInt((location.hash||'').replace('#',''),10);
+  go(isNaN(start)?0:Math.max(0,Math.min(N-1,start-1)),1);
+  addEventListener('hashchange',function(){var h=parseInt((location.hash||'').replace('#',''),10);if(!isNaN(h)&&h-1!==cur)go(h-1);});
+})();
+</script>
+</body>
+</html>
